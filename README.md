@@ -1,5 +1,7 @@
 # ⚽ Football Meme Super App
 
+> 🌐 **Languages:** [English](README_EN.md) | **Tiếng Việt** (current)
+
 **Hệ thống tự động quản lý và vận hành fanpage bóng đá chuyên nghiệp**
 
 Ứng dụng toàn diện giúp bạn xây dựng và phát triển fanpage bóng đá từ A-Z, từ thu thập tin tức, tạo meme, đăng bài tự động đến kiếm tiền từ quảng cáo và affiliate.

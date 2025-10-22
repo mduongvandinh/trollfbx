@@ -1,5 +1,7 @@
 # 🎯 BẮT ĐẦU TẠI ĐÂY - TrollFB Football Meme App
 
+> 🌐 **Ngôn ngữ khác:** [English](START_HERE_EN.md)
+
 ## 👋 Chào Mừng!
 
 Bạn vừa nhận được một hệ thống hoàn chỉnh để quản lý và phát triển fanpage bóng đá tự động với AI!
@@ -63,6 +65,28 @@ Mở trình duyệt: **http://localhost:3000** 🎉
 - ✅ Test ngay được
 
 👉 **[Đọc SIMPLE_GUIDE.md](SIMPLE_GUIDE.md)**
+
+---
+
+### 📚 FEATURES.md - Tổng Hợp Tính Năng
+**Danh sách đầy đủ tất cả tính năng của ứng dụng**
+- 📋 11 tính năng chính
+- 🤖 3 AI models integration
+- 📡 12 API endpoint groups
+- 🎯 Use case examples
+
+👉 **[Đọc FEATURES.md](FEATURES.md)**
+
+---
+
+### 🛠️ TECH_STACK.md - Công Nghệ Sử Dụng
+**Chi tiết đầy đủ về tech stack**
+- ⚛️ Frontend: React + TypeScript + Tailwind
+- 🐍 Backend: FastAPI + SQLAlchemy
+- 🤖 AI: Ollama + ComfyUI + OpenAI
+- 🐳 DevOps: Docker + Docker Compose
+
+👉 **[Đọc TECH_STACK.md](TECH_STACK.md)**
 
 ---
 

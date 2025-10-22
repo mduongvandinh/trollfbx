@@ -1,5 +1,7 @@
 # ⚽ TrollFB - Tổng Hợp Tính Năng
 
+> 🌐 **Ngôn ngữ khác:** [English](FEATURES_EN.md)
+
 **Football Meme Super App** - Hệ thống quản lý fanpage bóng đá tự động với AI
 
 ---

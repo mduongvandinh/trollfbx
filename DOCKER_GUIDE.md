@@ -1,5 +1,7 @@
 # 🐳 TrollFB - Docker Installation Guide
 
+> 🌐 **Ngôn ngữ khác:** [English](DOCKER_GUIDE_EN.md)
+
 Hướng dẫn chạy TrollFB bằng Docker - Cách dễ nhất để deploy ứng dụng!
 
 ## 📑 Mục Lục
