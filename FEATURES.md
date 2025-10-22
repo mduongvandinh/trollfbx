@@ -199,6 +199,11 @@ AI Analysis:
 
 **Location**: Content Creator → Style Selection
 
+**⚠️ Yêu Cầu GPU**:
+- **Cần GPU NVIDIA** để generate ảnh nhanh (6GB+ VRAM khuyến nghị)
+- Có thể chạy CPU nhưng **rất chậm** (vài phút mỗi ảnh thay vì vài giây)
+- Nếu dùng Docker: Cần cài `nvidia-docker` để sử dụng GPU
+
 **Features**:
 - ✅ 18+ LoRA Styles khả dụng:
   - Claymate (stop motion clay style)

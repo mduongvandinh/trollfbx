@@ -94,6 +94,10 @@ services:
   # ===========================================================================
   # ComfyUI - Image Generation (Optional)
   # ===========================================================================
+  # ⚠️ GPU REQUIREMENT: ComfyUI requires NVIDIA GPU (6GB+ VRAM recommended)
+  # - Can run on CPU but extremely slow (5-10 min per image)
+  # - For GPU support: Install nvidia-docker and add runtime: nvidia
+  #
   # Uncomment below if you want to use ComfyUI for image generation
   # comfyui:
   #   image: comfyui/comfyui:latest
@@ -104,6 +108,10 @@ services:
   #     - comfyui_data:/app/ComfyUI
   #   networks:
   #     - trollfb-network
+  #   # Uncomment for GPU support (requires nvidia-docker):
+  #   # runtime: nvidia
+  #   # environment:
+  #   #   - NVIDIA_VISIBLE_DEVICES=all
   #   restart: unless-stopped
 
 # =============================================================================

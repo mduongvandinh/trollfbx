@@ -118,6 +118,19 @@ Nếu thấy `qwen2.5:7b-instruct-q4_K_M` trong danh sách → Thành công! ✅
 
 ⚠️ **Bước này là OPTIONAL** - Chỉ cần nếu muốn tạo ảnh meme bằng AI
 
+### 📌 Yêu Cầu Hệ Thống cho ComfyUI
+
+**Khuyến nghị mạnh**:
+- **GPU NVIDIA** với 6GB+ VRAM (GTX 1060 6GB trở lên)
+- CUDA 11.8+ hoặc 12.1+
+- Drivers NVIDIA mới nhất
+
+**⚠️ Lưu ý quan trọng**:
+- ComfyUI **có thể chạy trên CPU** nhưng sẽ **cực kỳ chậm**
+- CPU: 5-10 phút mỗi ảnh
+- GPU: 5-15 giây mỗi ảnh
+- **Khuyến nghị bỏ qua bước này nếu không có GPU NVIDIA**
+
 ### 4.1. Download ComfyUI Portable
 
 1. Truy cập: https://github.com/comfyanonymous/ComfyUI/releases
@@ -128,7 +141,9 @@ Nếu thấy `qwen2.5:7b-instruct-q4_K_M` trong danh sách → Thành công! ✅
 
 1. Giải nén file `.7z` (dùng 7-Zip hoặc WinRAR)
 2. Giải nén vào thư mục (ví dụ: `C:\ComfyUI`)
-3. Vào thư mục đó, chạy `run_nvidia_gpu.bat` (nếu có GPU) hoặc `run_cpu.bat`
+3. Vào thư mục đó:
+   - **Nếu có GPU NVIDIA**: Chạy `run_nvidia_gpu.bat`
+   - **Nếu chỉ có CPU**: Chạy `run_cpu.bat` (không khuyến nghị - rất chậm)
 
 ### 4.3. Kiểm Tra ComfyUI
 
