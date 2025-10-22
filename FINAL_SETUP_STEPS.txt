@@ -1,0 +1,88 @@
+============================================
+MEME LIBRARY - SETUP HOÀN CHỈNH (3 bước)
+============================================
+
+✅ Đã kill tất cả Python processes cũ!
+
+Bây giờ chỉ cần 3 bước đơn giản:
+
+------------------------------------------
+BƯỚC 1: Cập nhật database.py (2 phút)
+------------------------------------------
+
+Mở file: backend/app/core/database.py
+
+Tìm dòng 132 (sau class AppSettings), THÊM:
+
+    # Import meme models
+    from app.models.meme_templates import Base as MemeBase
+    MemeBase.metadata.create_all(bind=engine)
+
+Hoặc đơn giản hơn, sau dòng 10:
+
+    from app.models.meme_templates import MemeTemplate, MemeVariation
+
+Lưu file.
+
+------------------------------------------
+BƯỚC 2: Start Backend (1 phút)
+------------------------------------------
+
+Mở Command Prompt/PowerShell:
+
+    cd D:\1.AI\3.projects\trollfb\backend
+    python main.py
+
+Chờ thấy:
+    ✅ Scheduler started successfully
+    Application started successfully!
+    INFO: Uvicorn running on http://0.0.0.0:8000
+
+------------------------------------------
+BƯỚC 3: Test API (2 phút)
+------------------------------------------
+
+Mở browser: http://localhost:8000/docs
+
+Tìm section "Meme Library & AI Analysis"
+
+Phải thấy 5 endpoints:
+  ✓ POST /api/meme/upload
+  ✓ POST /api/meme/generate-variations/{template_id}
+  ✓ GET /api/meme/templates
+  ✓ GET /api/meme/categories
+  ✓ GET /api/meme/variations/{template_id}
+
+Test Upload:
+  1. Click POST /api/meme/upload
+  2. Click "Try it out"
+  3. Upload ảnh bất kỳ
+  4. Caption: Elanga: "It was my childhood dream to play for Adidas."
+  5. Context: sponsor troll
+  6. Execute
+
+Kết quả mong đợi:
+  {
+    "success": true,
+    "template_id": 1,
+    "analysis": {...}
+  }
+
+------------------------------------------
+XEM CHI TIẾT HƠN
+------------------------------------------
+
+File hướng dẫn đầy đủ:
+  - setup_meme_library.md (Step-by-step guide)
+  - MEME_CRAWLER_IMPLEMENTATION.md (Technical docs)
+  - NEXT_STEPS_MEME_LIBRARY.md (Frontend code)
+
+============================================
+HẾT!
+============================================
+
+Nếu có lỗi, check:
+  - Backend logs trong terminal
+  - Database tables: sqlite3 database/football_meme.db ".tables"
+
+Good luck! 🚀

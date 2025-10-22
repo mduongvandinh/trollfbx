@@ -1,0 +1,89 @@
+{
+  "workflow_name": "Football Character Generator - 442oons Style",
+  "description": "Generate caricature football characters with consistent style",
+  "nodes": {
+    "checkpoint_loader": {
+      "class_type": "CheckpointLoaderSimple",
+      "inputs": {
+        "ckpt_name": "dreamshaper_8.safetensors"
+      },
+      "note": "Use cartoon/3D specialized model like Dreamshaper, Anything V5, or custom trained model"
+    },
+    "positive_prompt": {
+      "class_type": "CLIPTextEncode",
+      "inputs": {
+        "text": "3D cartoon character, chibi style, big head small body, caricature, football player, {{PLAYER_NAME}}, {{TEAM}} jersey, exaggerated features, {{EXPRESSION}} expression, {{POSE}} pose, colorful, plastic toy texture, studio lighting, white background, full body view, masterpiece, best quality, highly detailed, 8k",
+        "clip": ["checkpoint_loader", 1]
+      }
+    },
+    "negative_prompt": {
+      "class_type": "CLIPTextEncode",
+      "inputs": {
+        "text": "realistic, photo, photograph, ugly, blurry, low quality, bad anatomy, bad hands, missing fingers, extra fingers, watermark, signature, text, multiple people",
+        "clip": ["checkpoint_loader", 1]
+      }
+    },
+    "latent_image": {
+      "class_type": "EmptyLatentImage",
+      "inputs": {
+        "width": 512,
+        "height": 768,
+        "batch_size": 1
+      },
+      "note": "Portrait aspect ratio for character"
+    },
+    "ksampler": {
+      "class_type": "KSampler",
+      "inputs": {
+        "seed": 12345,
+        "steps": 30,
+        "cfg": 7.5,
+        "sampler_name": "euler_a",
+        "scheduler": "normal",
+        "denoise": 1.0,
+        "model": ["checkpoint_loader", 0],
+        "positive": ["positive_prompt", 0],
+        "negative": ["negative_prompt", 0],
+        "latent_image": ["latent_image", 0]
+      }
+    },
+    "vae_decode": {
+      "class_type": "VAEDecode",
+      "inputs": {
+        "samples": ["ksampler", 0],
+        "vae": ["checkpoint_loader", 2]
+      }
+    },
+    "save_image": {
+      "class_type": "SaveImage",
+      "inputs": {
+        "filename_prefix": "football_character_{{PLAYER_NAME}}",
+        "images": ["vae_decode", 0]
+      }
+    }
+  },
+  "advanced_options": {
+    "use_controlnet": true,
+    "controlnet_model": "control_v11p_sd15_openpose",
+    "use_lora": true,
+    "lora_models": [
+      {
+        "name": "3d_cartoon_style.safetensors",
+        "strength": 0.8
+      },
+      {
+        "name": "chibi_characters.safetensors",
+        "strength": 0.6
+      }
+    ]
+  },
+  "animation_workflow": {
+    "name": "AnimateDiff - Talking Head",
+    "description": "Create talking/moving character animation",
+    "use_animatediff": true,
+    "motion_module": "mm_sd_v15_v2.ckpt",
+    "frame_count": 48,
+    "fps": 8,
+    "notes": "Creates 6 seconds of animation at 8fps"
+  }
+}

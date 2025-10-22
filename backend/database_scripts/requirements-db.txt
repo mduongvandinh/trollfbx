@@ -1,0 +1,11 @@
+# Additional Database Drivers for TrollFB
+# Install these based on which database you want to use
+
+# PostgreSQL (Recommended for Production)
+psycopg2-binary>=2.9.9
+
+# MySQL/MariaDB
+mysql-connector-python>=8.2.0
+
+# Note: SQLAlchemy is already in main requirements.txt
+# Note: SQLite is built into Python, no driver needed

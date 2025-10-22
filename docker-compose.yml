@@ -1,0 +1,126 @@
+# ==============================================================================
+# TrollFB Docker Compose Configuration
+# ==============================================================================
+# This docker-compose file orchestrates all services needed to run TrollFB:
+# - Frontend (React + Nginx)
+# - Backend (FastAPI + Python)
+# - Ollama (AI Model Server)
+#
+# Usage:
+#   docker-compose up -d                 # Start all services
+#   docker-compose down                  # Stop all services
+#   docker-compose logs -f               # View logs
+#   docker-compose ps                    # Check status
+# ==============================================================================
+
+version: '3.8'
+
+services:
+  # ===========================================================================
+  # Ollama - AI Model Server
+  # ===========================================================================
+  ollama:
+    image: ollama/ollama:latest
+    container_name: trollfb-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    environment:
+      - OLLAMA_HOST=0.0.0.0
+    networks:
+      - trollfb-network
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    restart: unless-stopped
+
+  # ===========================================================================
+  # Backend - FastAPI Application
+  # ===========================================================================
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: trollfb-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/uploads:/app/uploads
+      - ./backend/football_meme.db:/app/football_meme.db
+    environment:
+      - DATABASE_URL=sqlite:///./football_meme.db
+      - OLLAMA_URL=http://ollama:11434
+      - COMFYUI_URL=http://comfyui:8188
+      - PYTHONUNBUFFERED=1
+    depends_on:
+      ollama:
+        condition: service_healthy
+    networks:
+      - trollfb-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+
+  # ===========================================================================
+  # Frontend - React + Nginx
+  # ===========================================================================
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: trollfb-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - trollfb-network
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:80/"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+    restart: unless-stopped
+
+  # ===========================================================================
+  # ComfyUI - Image Generation (Optional)
+  # ===========================================================================
+  # Uncomment below if you want to use ComfyUI for image generation
+  # comfyui:
+  #   image: comfyui/comfyui:latest
+  #   container_name: trollfb-comfyui
+  #   ports:
+  #     - "8188:8188"
+  #   volumes:
+  #     - comfyui_data:/app/ComfyUI
+  #   networks:
+  #     - trollfb-network
+  #   restart: unless-stopped
+
+# =============================================================================
+# Networks
+# =============================================================================
+networks:
+  trollfb-network:
+    driver: bridge
+    name: trollfb-network
+
+# =============================================================================
+# Volumes for persistent data
+# =============================================================================
+volumes:
+  ollama_data:
+    name: trollfb-ollama-data
+    driver: local
+  # comfyui_data:
+  #   name: trollfb-comfyui-data
+  #   driver: local

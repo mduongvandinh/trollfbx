@@ -1,0 +1,43 @@
+# Web Framework
+fastapi==0.109.0
+uvicorn[standard]==0.27.0
+python-multipart==0.0.6
+
+# Database
+sqlalchemy==2.0.25
+alembic==1.13.1
+
+# AI & Content Generation
+openai==1.10.0  # Optional - chỉ khi dùng OpenAI thay vì Ollama
+Pillow==10.2.0
+python-dotenv==1.0.0
+
+# Social Media APIs
+facebook-sdk==3.1.0
+tweepy==4.14.0  # Twitter API v2 support
+
+# Web Scraping & RSS
+feedparser==6.0.10
+beautifulsoup4==4.12.3
+requests==2.31.0
+lxml==5.1.0
+
+# Scheduling
+APScheduler==3.10.4
+
+# Image Processing - SIMPLIFIED
+# opencv-python==4.9.0.80  # Không cần - quá nặng
+numpy==1.26.3  # Cần cho Pillow
+
+# Utilities
+python-dateutil==2.8.2
+pytz==2023.3
+pydantic==2.5.3
+pydantic-settings==2.1.0
+
+# Security
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+
+# CORS
+fastapi-cors==0.0.6
