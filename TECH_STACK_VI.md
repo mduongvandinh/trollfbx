@@ -1,26 +1,26 @@
-# 🛠️ TrollFB - Tài Liệu Công Nghệ
+# 🛠️ TrollFB - Tech Stack Documentation
 
-> 🌐 **Ngôn ngữ khác:** [English](TECH_STACK.md)
+> 🌐 **Ngôn ngữ khác:** [English](TECH_STACK.md) | **Tiếng Việt** (current)
 
-Chi tiết đầy đủ về công nghệ, thư viện và công cụ được sử dụng trong TrollFB.
+Chi tiết đầy đủ về công nghệ, thư viện và tools được sử dụng trong TrollFB.
 
 ---
 
 ## 📑 Mục Lục
 
-- [Tổng Quan Kiến Trúc](#tổng-quan-kiến-trúc)
+- [Architecture Overview](#architecture-overview)
 - [Backend Stack](#backend-stack)
 - [Frontend Stack](#frontend-stack)
-- [AI & Học Máy](#ai--học-máy)
-- [Cơ Sở Dữ Liệu & Lưu Trữ](#cơ-sở-dữ-liệu--lưu-trữ)
-- [DevOps & Hạ Tầng](#devops--hạ-tầng)
-- [API & Dịch Vụ Bên Ngoài](#api--dịch-vụ-bên-ngoài)
-- [Công Cụ Phát Triển](#công-cụ-phát-triển)
-- [Tùy Chọn Triển Khai](#tùy-chọn-triển-khai)
+- [AI & Machine Learning](#ai--machine-learning)
+- [Database & Storage](#database--storage)
+- [DevOps & Infrastructure](#devops--infrastructure)
+- [External APIs & Services](#external-apis--services)
+- [Development Tools](#development-tools)
+- [Deployment Options](#deployment-options)
 
 ---
 
-## 🏗️ Tổng Quan Kiến Trúc
+## 🏗️ Architecture Overview
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -50,28 +50,28 @@ Chi tiết đầy đủ về công nghệ, thư viện và công cụ được s
    └─────────────────────────────────┘
 ```
 
-**Mô Hình Kiến Trúc (Architecture Pattern)**: Microservices-ready Monolith
-- Thiết kế theo module (dễ tách thành microservices)
-- Triển khai đơn giản (đơn giản hóa cho nhóm nhỏ)
-- Ranh giới dịch vụ nội bộ (tách biệt rõ ràng)
+**Architecture Pattern**: Microservices-ready Monolith
+- Modular design (easy to split into microservices)
+- Single deployment (simpler for small teams)
+- Internal service boundaries (clean separation)
 
 ---
 
 ## 🐍 Backend Stack
 
-### Khung Web (Framework)
+### Core Framework
 
 #### FastAPI 0.104+
-**Vai Trò**: Web Framework & API Server
+**Role**: Web Framework & API Server
 
-**Tại Sao Chọn FastAPI?**
-- ✅ Hiệu suất cao (tương đương NodeJS/Go)
-- ✅ Tự động tạo tài liệu OpenAPI
+**Why FastAPI?**
+- ✅ High performance (comparable to NodeJS/Go)
+- ✅ Auto-generated OpenAPI docs
 - ✅ Type hints & validation (Pydantic)
-- ✅ Hỗ trợ Async sẵn có
-- ✅ Dễ học & sử dụng
+- ✅ Async support out of the box
+- ✅ Easy to learn & use
 
-**Tính Năng Chính Được Sử Dụng**:
+**Key Features Used**:
 ```python
 # Dependency Injection
 from fastapi import Depends, FastAPI
@@ -86,19 +86,19 @@ from fastapi import BackgroundTasks
 from fastapi import WebSocket
 ```
 
-**Tài Liệu API**: http://localhost:8000/docs
+**API Docs**: http://localhost:8000/docs
 
 ---
 
 #### Uvicorn 0.24+
-**Vai Trò**: ASGI Server
+**Role**: ASGI Server
 
-**Tính Năng**:
-- Máy chủ ASGI cực nhanh
-- Hot reload cho phát triển
-- Sẵn sàng production với Gunicorn
+**Features**:
+- Lightning-fast ASGI server
+- Hot reload for development
+- Production-ready with Gunicorn
 
-**Cách Sử Dụng**:
+**Usage**:
 ```python
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
@@ -106,18 +106,18 @@ if __name__ == "__main__":
 
 ---
 
-### Lớp Dữ Liệu (Data Layer)
+### Data Layer
 
 #### SQLAlchemy 2.0+
-**Vai Trò**: ORM (Object-Relational Mapping)
+**Role**: ORM (Object-Relational Mapping)
 
-**Tại Sao Chọn SQLAlchemy?**
-- ✅ Độc lập với database (SQLite, PostgreSQL, MySQL)
-- ✅ Xây dựng query mạnh mẽ
-- ✅ Hỗ trợ migration
+**Why SQLAlchemy?**
+- ✅ Database-agnostic (SQLite, PostgreSQL, MySQL)
+- ✅ Powerful query building
+- ✅ Migration support
 - ✅ Connection pooling
 
-**Models Đã Định Nghĩa**:
+**Models Defined**:
 - NewsArticle
 - ContentPost
 - PostAnalytics
@@ -127,7 +127,7 @@ if __name__ == "__main__":
 - MemeTemplate
 - MemeVariation
 
-**Ví Dụ**:
+**Example**:
 ```python
 class NewsArticle(Base):
     __tablename__ = "news_articles"
@@ -141,15 +141,15 @@ class NewsArticle(Base):
 ---
 
 #### Pydantic 2.0+
-**Vai Trò**: Xác Thực & Tuần Tự Hóa Dữ Liệu (Data Validation & Serialization)
+**Role**: Data Validation & Serialization
 
-**Tính Năng**:
-- Xác thực kiểu dữ liệu
-- Tuần tự hóa JSON
-- Quản lý cài đặt
-- Tự động tạo schemas
+**Features**:
+- Type validation
+- JSON serialization
+- Settings management
+- Auto-generated schemas
 
-**Ví Dụ**:
+**Example**:
 ```python
 class ContentRequest(BaseModel):
     title: str
@@ -167,18 +167,18 @@ class ContentRequest(BaseModel):
 
 ---
 
-### HTTP & Giao Tiếp Bên Ngoài
+### HTTP & External Communication
 
 #### httpx 0.25+
-**Vai Trò**: Async HTTP Client
+**Role**: Async HTTP Client
 
-**Tại Sao Chọn httpx?**
-- Hỗ trợ async/await hiện đại
-- Hỗ trợ HTTP/2
-- Xử lý timeout
+**Why httpx?**
+- Modern async/await support
+- HTTP/2 support
+- Timeout handling
 - Connection pooling
 
-**Cách Sử Dụng**:
+**Usage**:
 ```python
 async with httpx.AsyncClient() as client:
     response = await client.post(
@@ -190,26 +190,26 @@ async with httpx.AsyncClient() as client:
 ---
 
 #### Requests 2.31+
-**Vai Trò**: Synchronous HTTP Client
+**Role**: Synchronous HTTP Client
 
-**Dùng Cho**:
-- Gọi Ollama API
-- Tích hợp ComfyUI
-- Lấy dữ liệu NewsAPI
+**For**:
+- Ollama API calls
+- ComfyUI integration
+- NewsAPI fetching
 
 ---
 
-### Lập Lịch Tác Vụ (Task Scheduling)
+### Task Scheduling
 
 #### APScheduler 3.10+
-**Vai Trò**: Background Task Scheduler
+**Role**: Background Task Scheduler
 
-**Tính Năng**:
-- Lập lịch kiểu Cron
-- Tác vụ theo khoảng thời gian
-- Thực thi nền
+**Features**:
+- Cron-like scheduling
+- Interval-based jobs
+- Background execution
 
-**Cách Sử Dụng**:
+**Usage**:
 ```python
 from apscheduler.schedulers.background import BackgroundScheduler
 
@@ -222,64 +222,64 @@ scheduler.add_job(
 scheduler.start()
 ```
 
-**Tác Vụ Đã Lập Lịch**:
-- Tự động lấy tin tức mỗi giờ
-- Tự động đăng nội dung đã lên lịch
-- Dọn dẹp dữ liệu cũ
+**Scheduled Tasks**:
+- Auto-fetch news every hour
+- Auto-post scheduled content
+- Cleanup old data
 
 ---
 
-### Xử Lý Ảnh & Video
+### Image & Video Processing
 
 #### Pillow (PIL) 10.0+
-**Vai Trò**: Xử Lý Ảnh (Image Manipulation)
+**Role**: Image Manipulation
 
-**Tính Năng**:
-- Thay đổi kích thước ảnh
-- Chuyển đổi định dạng
-- Thêm text lên ảnh
-- Bộ lọc & hiệu ứng
+**Features**:
+- Image resizing
+- Format conversion
+- Text overlay
+- Filters & effects
 
 ---
 
 #### MoviePy 1.0+
-**Vai Trò**: Xử Lý Video (Video Processing)
+**Role**: Video Processing
 
-**Tính Năng**:
-- Chỉnh sửa video
-- Thêm text lên video
-- Chuyển đổi định dạng
-- Tổng hợp clip
+**Features**:
+- Video editing
+- Text overlay on videos
+- Format conversion
+- Clip composition
 
 ---
 
-### Thư Viện Backend Khác
+### Other Backend Libraries
 
-| Thư Viện | Phiên Bản | Mục Đích |
+| Library | Version | Purpose |
 |---------|---------|---------|
-| **python-dotenv** | 1.0+ | Biến môi trường (Environment variables) |
-| **python-multipart** | 0.0.6+ | Upload file |
-| **beautifulsoup4** | 4.12+ | Phân tích HTML |
-| **feedparser** | 6.0+ | Phân tích RSS feed |
-| **python-jose** | 3.3+ | JWT tokens (xác thực tương lai) |
-| **passlib** | 1.7+ | Mã hóa mật khẩu (xác thực tương lai) |
+| **python-dotenv** | 1.0+ | Environment variables |
+| **python-multipart** | 0.0.6+ | File uploads |
+| **beautifulsoup4** | 4.12+ | HTML parsing |
+| **feedparser** | 6.0+ | RSS feed parsing |
+| **python-jose** | 3.3+ | JWT tokens (future auth) |
+| **passlib** | 1.7+ | Password hashing (future auth) |
 
 ---
 
 ## ⚛️ Frontend Stack
 
-### Khung Web Chính (Core Framework)
+### Core Framework
 
 #### React 18.2+
-**Vai Trò**: UI Framework
+**Role**: UI Framework
 
-**Tại Sao Chọn React?**
-- ✅ Kiến trúc theo component
-- ✅ Virtual DOM (cập nhật nhanh)
-- ✅ Hệ sinh thái lớn
-- ✅ Dễ học
+**Why React?**
+- ✅ Component-based architecture
+- ✅ Virtual DOM (fast updates)
+- ✅ Huge ecosystem
+- ✅ Easy to learn
 
-**Tính Năng Được Sử Dụng**:
+**Features Used**:
 - Hooks (useState, useEffect)
 - Context API
 - Suspense & Lazy loading
@@ -288,15 +288,15 @@ scheduler.start()
 ---
 
 #### TypeScript 5.0+
-**Vai Trò**: JavaScript An Toàn Kiểu (Type-safe JavaScript)
+**Role**: Type-safe JavaScript
 
-**Tại Sao Chọn TypeScript?**
-- ✅ Phát hiện lỗi khi compile
-- ✅ Hỗ trợ IDE tốt hơn
-- ✅ Code tự mô tả
-- ✅ An toàn khi refactor
+**Why TypeScript?**
+- ✅ Catch errors at compile time
+- ✅ Better IDE support
+- ✅ Self-documenting code
+- ✅ Refactoring safety
 
-**Ví Dụ**:
+**Example**:
 ```typescript
 interface MemeTemplate {
   id: number;
@@ -311,23 +311,23 @@ interface MemeTemplate {
 
 ---
 
-### Công Cụ Build (Build Tool)
+### Build Tool
 
 #### Vite 5.0+
-**Vai Trò**: Build Tool & Dev Server
+**Role**: Build Tool & Dev Server
 
-**Tại Sao Chọn Vite?**
-- ⚡ HMR cực nhanh (Hot Module Replacement)
-- ✅ ES modules gốc
-- ✅ Build production tối ưu
-- ✅ Hệ sinh thái plugin
+**Why Vite?**
+- ⚡ Lightning-fast HMR (Hot Module Replacement)
+- ✅ Native ES modules
+- ✅ Optimized production builds
+- ✅ Plugin ecosystem
 
-**So Với Webpack**:
-- Khởi động dev server nhanh gấp 10 lần
-- HMR tức thì
-- Cấu hình đơn giản hơn
+**vs Webpack**:
+- 10x faster dev server startup
+- Instant HMR
+- Simpler configuration
 
-**Cấu Hình**:
+**Config**:
 ```typescript
 // vite.config.ts
 export default defineConfig({
@@ -346,15 +346,15 @@ export default defineConfig({
 ### UI & Styling
 
 #### Tailwind CSS 3.4+
-**Vai Trò**: Utility-first CSS Framework
+**Role**: Utility-first CSS Framework
 
-**Tại Sao Chọn Tailwind?**
-- ✅ Phát triển nhanh
-- ✅ Hệ thống thiết kế nhất quán
-- ✅ Không xung đột CSS
-- ✅ Bundle production nhỏ gọn
+**Why Tailwind?**
+- ✅ Rapid development
+- ✅ Consistent design system
+- ✅ No CSS conflicts
+- ✅ Tiny production bundle
 
-**Ví Dụ**:
+**Example**:
 ```tsx
 <div className="flex items-center gap-3 px-6 py-3 hover:bg-blue-50 transition-colors">
   <Icon size={20} />
@@ -362,7 +362,7 @@ export default defineConfig({
 </div>
 ```
 
-**Tùy Chỉnh**:
+**Customization**:
 ```javascript
 // tailwind.config.js
 module.exports = {
@@ -380,15 +380,15 @@ module.exports = {
 ---
 
 #### Lucide React 0.290+
-**Vai Trò**: Thư Viện Icon (Icon Library)
+**Role**: Icon Library
 
-**Tính Năng**:
-- 1000+ icon đẹp
-- Tree-shakeable (chỉ import những gì dùng)
-- Thiết kế nhất quán
-- Dễ truy cập
+**Features**:
+- 1000+ beautiful icons
+- Tree-shakeable (only import what you use)
+- Consistent design
+- Accessible
 
-**Cách Sử Dụng**:
+**Usage**:
 ```tsx
 import { Home, Newspaper, TrendingUp } from 'lucide-react'
 
@@ -398,18 +398,18 @@ import { Home, Newspaper, TrendingUp } from 'lucide-react'
 
 ---
 
-### Routing (Định Tuyến)
+### Routing
 
 #### React Router 6.20+
-**Vai Trò**: Client-side Routing
+**Role**: Client-side Routing
 
-**Tính Năng**:
-- Routing khai báo
+**Features**:
+- Declarative routing
 - Nested routes
 - Dynamic routes
 - Navigation guards
 
-**Ví Dụ**:
+**Example**:
 ```tsx
 <Routes>
   <Route path="/" element={<Dashboard />} />
@@ -420,18 +420,18 @@ import { Home, Newspaper, TrendingUp } from 'lucide-react'
 
 ---
 
-### Quản Lý State & Lấy Dữ Liệu
+### State Management & Data Fetching
 
 #### Axios 1.6+
-**Vai Trò**: HTTP Client
+**Role**: HTTP Client
 
-**Tại Sao Chọn Axios?**
-- ✅ Hỗ trợ Interceptors
-- ✅ Chuyển đổi request/response
-- ✅ Xử lý lỗi
-- ✅ Hỗ trợ TypeScript
+**Why Axios?**
+- ✅ Interceptors support
+- ✅ Request/response transformation
+- ✅ Error handling
+- ✅ TypeScript support
 
-**Ví Dụ**:
+**Example**:
 ```typescript
 const response = await axios.post<MemeTemplate>(
   'http://localhost:8000/api/meme/upload',
@@ -456,15 +456,15 @@ axios.interceptors.response.use(
 ---
 
 #### React Hot Toast 2.4+
-**Vai Trò**: Thông Báo (Notifications)
+**Role**: Notifications
 
-**Tính Năng**:
-- Toast notifications đẹp
-- Toast dựa trên Promise
-- Có thể tùy chỉnh
-- Dễ truy cập
+**Features**:
+- Beautiful toast notifications
+- Promise-based toasts
+- Customizable
+- Accessible
 
-**Cách Sử Dụng**:
+**Usage**:
 ```tsx
 toast.success('Post created successfully!')
 toast.error('Failed to upload image')
@@ -473,19 +473,19 @@ toast.loading('Generating content...')
 
 ---
 
-### Biểu Đồ & Trực Quan Hóa
+### Charts & Visualization
 
 #### Recharts 2.10+
-**Vai Trò**: Thư Viện Biểu Đồ (Charts Library)
+**Role**: Charts Library
 
-**Biểu Đồ Có Sẵn**:
-- Biểu đồ đường
-- Biểu đồ cột
-- Biểu đồ tròn
-- Biểu đồ vùng
-- Biểu đồ kết hợp
+**Charts Available**:
+- Line charts
+- Bar charts
+- Pie charts
+- Area charts
+- Composed charts
 
-**Ví Dụ**:
+**Example**:
 ```tsx
 <LineChart data={analyticsData}>
   <XAxis dataKey="date" />
@@ -497,37 +497,37 @@ toast.loading('Generating content...')
 
 ---
 
-### Thư Viện Frontend Khác
+### Other Frontend Libraries
 
-| Thư Viện | Phiên Bản | Mục Đích |
+| Library | Version | Purpose |
 |---------|---------|---------|
-| **clsx** | 2.0+ | ClassNames có điều kiện |
-| **date-fns** | 2.30+ | Xử lý ngày tháng |
-| **react-hook-form** | 7.48+ | Xử lý form |
-| **zod** | 3.22+ | Xác thực schema |
+| **clsx** | 2.0+ | Conditional classNames |
+| **date-fns** | 2.30+ | Date manipulation |
+| **react-hook-form** | 7.48+ | Form handling |
+| **zod** | 3.22+ | Schema validation |
 
 ---
 
-## 🤖 AI & Học Máy
+## 🤖 AI & Machine Learning
 
-### AI Cục Bộ (Local AI - Ollama)
+### Local AI (Ollama)
 
 #### Ollama
-**Vai Trò**: Local LLM Runtime
+**Role**: Local LLM Runtime
 
 **Model**: `qwen2.5:7b-instruct-q4_K_M`
 
-**Thông Số**:
-- Kích thước: ~4.5GB
+**Specs**:
+- Size: ~4.5GB
 - Context: 32K tokens
-- Quantization: Q4_K_M (cân bằng tốc độ/chất lượng)
+- Quantization: Q4_K_M (balanced speed/quality)
 
-**Khả Năng**:
-- Tạo văn bản
-- Tạo caption
-- Gợi ý nội dung
-- Phân tích meme
-- Hỗ trợ tiếng Việt
+**Capabilities**:
+- Text generation
+- Caption creation
+- Content suggestions
+- Meme analysis
+- Vietnamese language support
 
 **API**:
 ```python
@@ -541,17 +541,17 @@ POST http://localhost:11434/api/generate
 
 ---
 
-### AI Đám Mây (Cloud AI - Tùy Chọn)
+### Cloud AI (Optional)
 
 #### OpenAI API
-**Vai Trò**: Nhà Cung Cấp AI Thay Thế
+**Role**: Alternative AI Provider
 
-**Models Được Hỗ Trợ**:
+**Models Supported**:
 - GPT-3.5-turbo
 - GPT-4
 - GPT-4-turbo
 
-**Cách Sử Dụng**:
+**Usage**:
 ```python
 import openai
 
@@ -564,36 +564,36 @@ response = openai.ChatCompletion.create(
 
 ---
 
-### Tạo Ảnh (Image Generation)
+### Image Generation
 
 #### ComfyUI + Stable Diffusion
-**Vai Trò**: Tạo Ảnh AI
+**Role**: AI Image Generation
 
-**⚠️ Yêu Cầu GPU**:
-- **Yêu cầu GPU NVIDIA** để hiệu suất tối ưu (khuyến nghị 6GB+ VRAM)
-- Có thể chạy trên CPU nhưng sẽ **cực kỳ chậm** (vài phút mỗi ảnh thay vì vài giây)
-- Với Docker: Yêu cầu `nvidia-docker` runtime để hỗ trợ GPU
+**⚠️ GPU Requirement**:
+- **Requires NVIDIA GPU** for optimal performance (6GB+ VRAM recommended)
+- Can run on CPU but will be **extremely slow** (minutes per image vs seconds)
+- For Docker: Requires `nvidia-docker` runtime for GPU support
 
 **Models**:
 - Stable Diffusion XL
 - LoRA Adapters (18+ styles)
 
-**Styles Có Sẵn**:
+**Styles Available**:
 - Claymate (stop motion)
 - 442oons (cartoon football)
 - Pixel Art
 - LEGO Minifig
 - Anime
 - Funko Pop
-- Và nhiều hơn...
+- And more...
 
-**Quy Trình**:
+**Workflow**:
 ```
-1. User chọn style
-2. Backend gửi prompt đến ComfyUI
-3. ComfyUI tạo ảnh với LoRA
-4. Ảnh được lưu vào uploads/
-5. Trả về path cho frontend
+1. User selects style
+2. Backend sends prompt to ComfyUI
+3. ComfyUI generates image with LoRA
+4. Image saved to uploads/
+5. Path returned to frontend
 ```
 
 **API**:
@@ -615,41 +615,41 @@ POST http://localhost:8188/prompt
 
 ---
 
-## 💾 Cơ Sở Dữ Liệu & Lưu Trữ
+## 💾 Database & Storage
 
-### Cơ Sở Dữ Liệu Chính
+### Primary Database
 
-#### SQLite (Mặc Định)
-**Vai Trò**: Database Phát Triển
+#### SQLite (Default)
+**Role**: Development Database
 
-**Ưu Điểm**:
-- ✅ Không cần cấu hình
-- ✅ File đơn giản
-- ✅ Nhanh với dữ liệu nhỏ
-- ✅ Hoàn hảo cho phát triển
+**Pros**:
+- ✅ Zero configuration
+- ✅ Single file
+- ✅ Fast for small data
+- ✅ Perfect for development
 
-**Nhược Điểm**:
-- ❌ Đồng thời hạn chế
-- ❌ Thiếu tính năng nâng cao
+**Cons**:
+- ❌ Limited concurrency
+- ❌ No advanced features
 
 **File**: `football_meme.db`
 
 ---
 
-### Cơ Sở Dữ Liệu Production
+### Production Databases
 
-#### PostgreSQL (Khuyến Nghị)
-**Vai Trò**: Database Production
+#### PostgreSQL (Recommended)
+**Role**: Production Database
 
-**Ưu Điểm**:
-- ✅ Tuân thủ ACID
-- ✅ Tính năng nâng cao (JSONB, full-text search)
-- ✅ Đồng thời xuất sắc
-- ✅ Mở rộng cao
+**Pros**:
+- ✅ ACID compliant
+- ✅ Advanced features (JSONB, full-text search)
+- ✅ Excellent concurrency
+- ✅ Highly scalable
 
 **Schema**: `database_scripts/schema_postgresql.sql`
 
-**Kết Nối**:
+**Connection**:
 ```python
 DATABASE_URL = "postgresql://user:pass@localhost:5432/trollfb_db"
 ```
@@ -657,27 +657,27 @@ DATABASE_URL = "postgresql://user:pass@localhost:5432/trollfb_db"
 ---
 
 #### MySQL 8.0+
-**Vai Trò**: Database Production Thay Thế
+**Role**: Alternative Production Database
 
-**Ưu Điểm**:
-- ✅ Được hỗ trợ rộng rãi
-- ✅ Hiệu suất tốt
-- ✅ Hỗ trợ JSON
-- ✅ Dễ nhân bản
+**Pros**:
+- ✅ Widely supported
+- ✅ Good performance
+- ✅ JSON support
+- ✅ Easy replication
 
 **Schema**: `database_scripts/schema_mysql.sql`
 
-**Kết Nối**:
+**Connection**:
 ```python
 DATABASE_URL = "mysql+mysqlconnector://user:pass@localhost:3306/trollfb_db"
 ```
 
 ---
 
-### Lưu Trữ File (File Storage)
+### File Storage
 
-#### Hệ Thống File Cục Bộ (Local File System)
-**Cấu Trúc**:
+#### Local File System
+**Structure**:
 ```
 backend/
 └── uploads/
@@ -686,28 +686,28 @@ backend/
     └── comfyui/          # AI-generated images
 ```
 
-#### Tương Lai: Cloud Storage
-**Hỗ Trợ Dự Kiến**:
+#### Future: Cloud Storage
+**Planned Support**:
 - AWS S3
 - Google Cloud Storage
 - Azure Blob Storage
 
 ---
 
-## 🚀 DevOps & Hạ Tầng
+## 🚀 DevOps & Infrastructure
 
-### Containerization (Đóng Gói Container)
+### Containerization
 
 #### Docker 24.0+
-**Vai Trò**: Containerization Platform
+**Role**: Containerization Platform
 
-**Tại Sao Chọn Docker?**
-- ✅ Môi trường nhất quán
-- ✅ Triển khai dễ dàng
-- ✅ Cô lập
-- ✅ Khả năng di chuyển
+**Why Docker?**
+- ✅ Consistent environments
+- ✅ Easy deployment
+- ✅ Isolation
+- ✅ Portability
 
-**Images Được Sử Dụng**:
+**Images Used**:
 - `python:3.10-slim` (Backend)
 - `node:18-alpine` (Frontend build)
 - `nginx:alpine` (Frontend serve)
@@ -716,9 +716,9 @@ backend/
 ---
 
 #### Docker Compose 2.20+
-**Vai Trò**: Multi-container Orchestration
+**Role**: Multi-container Orchestration
 
-**Services Đã Định Nghĩa**:
+**Services Defined**:
 ```yaml
 services:
   backend:    # FastAPI app
@@ -726,28 +726,28 @@ services:
   ollama:     # AI model server
 ```
 
-**Lệnh**:
+**Commands**:
 ```bash
-docker-compose up -d      # Khởi động tất cả
-docker-compose down       # Dừng tất cả
-docker-compose logs -f    # Xem logs
+docker-compose up -d      # Start all
+docker-compose down       # Stop all
+docker-compose logs -f    # View logs
 ```
 
 ---
 
-### Web Server (Máy Chủ Web)
+### Web Server
 
 #### Nginx (Production)
-**Vai Trò**: Reverse Proxy & Static Server
+**Role**: Reverse Proxy & Static Server
 
-**Tính Năng**:
-- Phục vụ static files (React build)
-- Proxy API requests đến backend
+**Features**:
+- Serve static files (React build)
+- Proxy API requests to backend
 - Gzip compression
 - SSL/TLS termination
-- Sẵn sàng load balancing
+- Load balancing ready
 
-**Cấu Hình**:
+**Config**:
 ```nginx
 location / {
     try_files $uri $uri/ /index.html;
@@ -760,86 +760,86 @@ location /api/ {
 
 ---
 
-### CI/CD (Tương Lai)
+### CI/CD (Future)
 
 #### GitHub Actions
-**Workflows Dự Kiến**:
-- Chạy tests khi PR
+**Planned Workflows**:
+- Run tests on PR
 - Build Docker images
-- Deploy lên staging
-- Deploy lên production
+- Deploy to staging
+- Deploy to production
 
 ---
 
-## 🌐 API & Dịch Vụ Bên Ngoài
+## 🌐 External APIs & Services
 
-### News API (API Tin Tức)
+### News API
 
 #### NewsAPI.org
-**Vai Trò**: Tổng Hợp Tin Tức
+**Role**: News Aggregation
 
 **Endpoints**:
-- `/v2/everything` - Tìm kiếm tin tức
-- `/v2/top-headlines` - Tin tức hàng đầu
+- `/v2/everything` - Search news
+- `/v2/top-headlines` - Top headlines
 
-**Giới Hạn Tốc Độ**:
-- Miễn phí: 100 requests/ngày
-- Trả phí: Không giới hạn
+**Rate Limits**:
+- Free: 100 requests/day
+- Paid: Unlimited
 
 ---
 
-### Social Media APIs (API Mạng Xã Hội)
+### Social Media APIs
 
 #### Facebook Graph API
-**Vai Trò**: Đăng Lên Facebook Pages
+**Role**: Post to Facebook Pages
 
 **Endpoints**:
-- `/page/feed` - Đăng nội dung
-- `/page/insights` - Lấy analytics
+- `/page/feed` - Post content
+- `/page/insights` - Get analytics
 
-**Yêu Cầu**:
+**Requirements**:
 - Facebook App
 - Page Access Token
 
 ---
 
-#### Twitter API (Sẵn Sàng)
-**Vai Trò**: Đăng Lên Twitter
+#### Twitter API (Ready)
+**Role**: Post to Twitter
 
-**Tích Hợp Dự Kiến**:
-- Đăng Tweet
-- Upload media
-- Theo dõi engagement
+**Planned Integration**:
+- Tweet posting
+- Media upload
+- Engagement tracking
 
 ---
 
-### Dịch Vụ AI (AI Services)
+### AI Services
 
 #### Ollama (Self-hosted)
-- Miễn phí
-- Xử lý cục bộ
-- Thân thiện với quyền riêng tư
+- Free
+- Local processing
+- Privacy-friendly
 
 #### OpenAI (Cloud)
-- API trả phí
-- Chất lượng tốt hơn (GPT-4)
-- Giới hạn tốc độ
+- Paid API
+- Better quality (GPT-4)
+- Rate limited
 
 ---
 
-## 🛠️ Công Cụ Phát Triển
+## 🛠️ Development Tools
 
-### Version Control (Quản Lý Phiên Bản)
+### Version Control
 
 #### Git
-**Quy Trình**:
+**Workflow**:
 - Feature branches
 - Pull requests
 - Semantic versioning
 
 ---
 
-### Chất Lượng Code (Code Quality)
+### Code Quality
 
 #### Python
 - **Black**: Code formatter
@@ -854,9 +854,9 @@ location /api/ {
 
 ---
 
-### Hỗ Trợ IDE
+### IDE Support
 
-**Khuyến Nghị**:
+**Recommended**:
 - VS Code
 - PyCharm
 - WebStorm
@@ -869,16 +869,16 @@ location /api/ {
 
 ---
 
-## 📦 Tùy Chọn Triển Khai
+## 📦 Deployment Options
 
-### Tùy Chọn 1: Triển Khai Thủ Công
+### Option 1: Manual Deployment
 
-**Yêu Cầu**:
+**Requirements**:
 - Python 3.10+
 - Node.js 18+
 - Ollama
 
-**Các Bước**:
+**Steps**:
 ```bash
 # Backend
 python -m venv venv
@@ -894,38 +894,38 @@ npm run preview
 
 ---
 
-### Tùy Chọn 2: Triển Khai Docker
+### Option 2: Docker Deployment
 
-**Yêu Cầu**:
+**Requirements**:
 - Docker
 - Docker Compose
 
-**Các Bước**:
+**Steps**:
 ```bash
 docker-compose up -d
 ```
 
-**Chỉ vậy thôi!** ✨
+**That's it!** ✨
 
 ---
 
-### Tùy Chọn 3: Triển Khai Cloud
+### Option 3: Cloud Deployment
 
-#### Nền Tảng Được Hỗ Trợ:
+#### Platforms Supported:
 - **AWS**: EC2, ECS, Lightsail
 - **Google Cloud**: Compute Engine, Cloud Run
 - **Azure**: App Service, Container Instances
 - **DigitalOcean**: Droplets, App Platform
 - **Heroku**: Container deployment
 - **Railway**: One-click deploy
-- **Render**: Free tier có sẵn
+- **Render**: Free tier available
 
 ---
 
-## 📊 Tóm Tắt Tech Stack
+## 📊 Tech Stack Summary
 
 ### Backend
-| Danh Mục | Công Nghệ | Phiên Bản |
+| Category | Technology | Version |
 |----------|-----------|---------|
 | **Framework** | FastAPI | 0.104+ |
 | **Server** | Uvicorn | 0.24+ |
@@ -937,7 +937,7 @@ docker-compose up -d
 | **Videos** | MoviePy | 1.0+ |
 
 ### Frontend
-| Danh Mục | Công Nghệ | Phiên Bản |
+| Category | Technology | Version |
 |----------|-----------|---------|
 | **Framework** | React | 18.2+ |
 | **Language** | TypeScript | 5.0+ |
@@ -949,30 +949,30 @@ docker-compose up -d
 | **Charts** | Recharts | 2.10+ |
 
 ### AI/ML
-| Công Nghệ | Mục Đích | Model |
+| Technology | Purpose | Model |
 |-----------|---------|-------|
-| **Ollama** | Tạo văn bản | qwen2.5:7b |
-| **ComfyUI** | Tạo ảnh | SDXL + LoRAs |
-| **OpenAI** | AI thay thế | GPT-3.5/4 |
+| **Ollama** | Text generation | qwen2.5:7b |
+| **ComfyUI** | Image generation | SDXL + LoRAs |
+| **OpenAI** | Alternative AI | GPT-3.5/4 |
 
-### Database (Cơ Sở Dữ Liệu)
-| Database | Use Case | Trạng Thái |
+### Database
+| Database | Use Case | Status |
 |----------|----------|--------|
-| **SQLite** | Phát triển | Mặc định |
-| **PostgreSQL** | Production | Sẵn sàng |
-| **MySQL** | Thay thế | Sẵn sàng |
+| **SQLite** | Development | Default |
+| **PostgreSQL** | Production | Ready |
+| **MySQL** | Alternative | Ready |
 
-### Infrastructure (Hạ Tầng)
-| Công Nghệ | Mục Đích | Trạng Thái |
+### Infrastructure
+| Technology | Purpose | Status |
 |-----------|---------|--------|
 | **Docker** | Containerization | ✅ |
 | **Docker Compose** | Orchestration | ✅ |
 | **Nginx** | Web server | ✅ |
-| **GitHub Actions** | CI/CD | Dự kiến |
+| **GitHub Actions** | CI/CD | Planned |
 
 ---
 
-## 🎓 Tài Nguyên Học Tập
+## 🎓 Learning Resources
 
 ### Backend
 - [FastAPI Documentation](https://fastapi.tiangolo.com/)
@@ -996,6 +996,6 @@ docker-compose up -d
 
 ---
 
-**TrollFB - Được xây dựng với các công nghệ hiện đại, đã được kiểm chứng! 🚀**
+**TrollFB - Built with modern, battle-tested technologies! 🚀**
 
-*Phiên Bản Tech Stack: 1.0 - Cập Nhật Lần Cuối: 2025-10-23*
+*Tech Stack Version: 1.0 - Last Updated: 2025-10-23*

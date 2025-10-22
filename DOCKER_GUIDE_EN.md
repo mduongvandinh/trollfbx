@@ -1,77 +1,77 @@
 # 🐳 TrollFB - Docker Installation Guide
 
-> 🌐 **Ngôn ngữ khác:** [English](DOCKER_GUIDE_EN.md) | **Tiếng Việt** (current)
+> 🌐 **Languages:** **English** (current) | [Tiếng Việt](DOCKER_GUIDE.md)
 
-Hướng dẫn chạy TrollFB bằng Docker - Cách dễ nhất để deploy ứng dụng!
+Guide to running TrollFB with Docker - The easiest way to deploy the application!
 
-## 📑 Mục Lục
+## 📑 Table of Contents
 
-- [Tại Sao Dùng Docker?](#tại-sao-dùng-docker)
-- [Yêu Cầu Hệ Thống](#yêu-cầu-hệ-thống)
-- [Cài Đặt Docker](#cài-đặt-docker)
-- [Quick Start](#quick-start-5-phút)
-- [Chi Tiết Các Services](#chi-tiết-các-services)
-- [Commands Thường Dùng](#commands-thường-dùng)
+- [Why Use Docker?](#why-use-docker)
+- [System Requirements](#system-requirements)
+- [Installing Docker](#installing-docker)
+- [Quick Start](#quick-start-5-minutes)
+- [Service Details](#service-details)
+- [Common Commands](#common-commands)
 - [Troubleshooting](#troubleshooting)
 
 ---
 
-## 🎯 Tại Sao Dùng Docker?
+## 🎯 Why Use Docker?
 
-✅ **Setup Cực Nhanh**: 1 command để chạy toàn bộ app
-✅ **Không Cần Cài Python/Node**: Tất cả đã có trong container
-✅ **Không Lo Conflict**: Mỗi service chạy riêng biệt
-✅ **Dễ Deploy**: Đưa lên server chỉ cần Docker
-✅ **Consistent**: Chạy giống nhau trên Windows/Linux/Mac
+✅ **Super Fast Setup**: 1 command to run entire app
+✅ **No Need to Install Python/Node**: Everything is in containers
+✅ **No Conflicts**: Each service runs independently
+✅ **Easy Deploy**: Deploy to server with just Docker
+✅ **Consistent**: Runs the same on Windows/Linux/Mac
 
 ---
 
-## 💻 Yêu Cầu Hệ Thống
+## 💻 System Requirements
 
-### Tối Thiểu
+### Minimum
 - **CPU**: 4 cores
-- **RAM**: 8GB (16GB khuyến nghị)
-- **Disk**: 20GB trống (cho Docker images & Ollama models)
+- **RAM**: 8GB (16GB recommended)
+- **Disk**: 20GB free (for Docker images & Ollama models)
 - **OS**: Windows 10/11, Ubuntu 20.04+, macOS 10.15+
 
-### Khuyến Nghị
+### Recommended
 - **CPU**: 8+ cores
 - **RAM**: 16GB+
 - **Disk**: 50GB+ SSD
-- **GPU**: NVIDIA GPU (optional, cho Ollama nhanh hơn)
+- **GPU**: NVIDIA GPU (optional, for faster Ollama)
 
 ---
 
-## 🔧 Cài Đặt Docker
+## 🔧 Installing Docker
 
 ### Windows (10/11)
 
-#### Bước 1: Download Docker Desktop
+#### Step 1: Download Docker Desktop
 
-1. Truy cập: https://www.docker.com/products/docker-desktop/
+1. Visit: https://www.docker.com/products/docker-desktop/
 2. Click **"Download for Windows"**
-3. Lưu file `Docker Desktop Installer.exe`
+3. Save file `Docker Desktop Installer.exe`
 
-#### Bước 2: Cài Đặt
+#### Step 2: Installation
 
-1. Chạy file installer
-2. Tick vào **"Use WSL 2 instead of Hyper-V"** (khuyến nghị)
-3. Click **"Ok"** → Đợi cài đặt (5-10 phút)
-4. **Restart** máy tính khi được yêu cầu
+1. Run installer file
+2. Check **"Use WSL 2 instead of Hyper-V"** (recommended)
+3. Click **"Ok"** → Wait for installation (5-10 minutes)
+4. **Restart** computer when prompted
 
-#### Bước 3: Kiểm Tra
+#### Step 3: Verify
 
-Mở PowerShell hoặc CMD:
+Open PowerShell or CMD:
 ```powershell
 docker --version
 docker-compose --version
 ```
 
-Nếu hiện version → Cài đặt thành công! ✅
+If version appears → Installation successful! ✅
 
 ### Ubuntu/Linux
 
-#### Bước 1: Cài Docker Engine
+#### Step 1: Install Docker Engine
 
 ```bash
 # Update package database
@@ -91,14 +91,14 @@ sudo apt update
 sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
 ```
 
-#### Bước 2: Add User to Docker Group
+#### Step 2: Add User to Docker Group
 
 ```bash
 sudo usermod -aG docker $USER
 newgrp docker
 ```
 
-#### Bước 3: Kiểm Tra
+#### Step 3: Verify
 
 ```bash
 docker --version
@@ -107,9 +107,9 @@ docker compose version
 
 ---
 
-## ⚡ Quick Start (5 Phút)
+## ⚡ Quick Start (5 Minutes)
 
-### Bước 1: Clone Repository
+### Step 1: Clone Repository
 
 ```bash
 # Windows (PowerShell/CMD)
@@ -123,18 +123,18 @@ git clone https://github.com/your-username/trollfb.git
 cd trollfb
 ```
 
-### Bước 2: Start All Services
+### Step 2: Start All Services
 
 ```bash
 docker-compose up -d
 ```
 
-**Lần đầu chạy** sẽ mất **10-15 phút** vì phải:
+**First run** will take **10-15 minutes** because:
 - Download Docker images (Python, Node, Ollama)
 - Build frontend & backend
 - Download Ollama model (4.5GB)
 
-**Output mong đợi**:
+**Expected output**:
 ```
 [+] Running 3/3
  ✔ Container trollfb-ollama    Started
@@ -142,23 +142,23 @@ docker-compose up -d
  ✔ Container trollfb-frontend  Started
 ```
 
-### Bước 3: Download Ollama Model
+### Step 3: Download Ollama Model
 
-Ollama container cần download AI model lần đầu:
+Ollama container needs to download AI model first time:
 
 ```bash
 docker exec trollfb-ollama ollama pull qwen2.5:7b-instruct-q4_K_M
 ```
 
-Đợi download xong (4.5GB, mất 5-15 phút).
+Wait for download to complete (4.5GB, takes 5-15 minutes).
 
-### Bước 4: Kiểm Tra Services
+### Step 4: Check Services
 
 ```bash
 docker-compose ps
 ```
 
-**Tất cả services phải ở trạng thái "Up"**:
+**All services must be "Up" status**:
 ```
 NAME                 IMAGE                  STATUS
 trollfb-backend      trollfb-backend        Up (healthy)
@@ -166,17 +166,17 @@ trollfb-frontend     trollfb-frontend       Up (healthy)
 trollfb-ollama       ollama/ollama:latest   Up (healthy)
 ```
 
-### Bước 5: Mở Ứng Dụng
+### Step 5: Open Application
 
 **Frontend**: http://localhost:3000
 **Backend API Docs**: http://localhost:8000/docs
 **Ollama**: http://localhost:11434
 
-🎉 **HOÀN THÀNH! Ứng dụng đã chạy!**
+🎉 **COMPLETE! Application is running!**
 
 ---
 
-## 📦 Chi Tiết Các Services
+## 📦 Service Details
 
 ### 1. Frontend (React + Nginx)
 
@@ -184,10 +184,10 @@ trollfb-ollama       ollama/ollama:latest   Up (healthy)
 **Container**: `trollfb-frontend`
 **Base Image**: `nginx:alpine`
 
-**Đặc điểm**:
+**Features**:
 - Multi-stage build (build → production)
-- Serve static files với Nginx
-- Proxy API requests đến backend
+- Serve static files with Nginx
+- Proxy API requests to backend
 - Gzip compression enabled
 
 ### 2. Backend (FastAPI + Python)
@@ -196,11 +196,11 @@ trollfb-ollama       ollama/ollama:latest   Up (healthy)
 **Container**: `trollfb-backend`
 **Base Image**: `python:3.10-slim`
 
-**Đặc điểm**:
-- Auto-reload khi code thay đổi (development)
-- Database file được mount từ host
-- Upload folder được mount từ host
-- Kết nối với Ollama qua internal network
+**Features**:
+- Auto-reload when code changes (development)
+- Database file mounted from host
+- Upload folder mounted from host
+- Connects to Ollama via internal network
 
 ### 3. Ollama (AI Model Server)
 
@@ -208,14 +208,14 @@ trollfb-ollama       ollama/ollama:latest   Up (healthy)
 **Container**: `trollfb-ollama`
 **Base Image**: `ollama/ollama:latest`
 
-**Đặc điểm**:
-- Chạy AI models locally
-- Models được lưu trong Docker volume (persistent)
-- Hỗ trợ GPU (nếu có NVIDIA GPU + nvidia-docker)
+**Features**:
+- Run AI models locally
+- Models saved in Docker volume (persistent)
+- GPU support (if NVIDIA GPU + nvidia-docker available)
 
 ---
 
-## 🎮 Commands Thường Dùng
+## 🎮 Common Commands
 
 ### Start/Stop Services
 
@@ -321,7 +321,7 @@ docker system prune -a --volumes
 
 ### Volumes
 
-Docker sử dụng volumes để lưu data persistent:
+Docker uses volumes to save persistent data:
 
 ```yaml
 volumes:
@@ -352,19 +352,19 @@ docker cp ./backup_uploads trollfb-backend:/app/uploads
 
 ## 🔧 Troubleshooting
 
-### ❌ Lỗi: "Cannot connect to the Docker daemon"
+### ❌ Error: "Cannot connect to the Docker daemon"
 
-**Nguyên nhân**: Docker chưa chạy
+**Cause**: Docker not running
 
-**Giải pháp**:
-- **Windows**: Mở Docker Desktop
+**Solution**:
+- **Windows**: Open Docker Desktop
 - **Linux**: `sudo systemctl start docker`
 
-### ❌ Lỗi: "port is already allocated"
+### ❌ Error: "port is already allocated"
 
-**Nguyên nhân**: Port 3000, 8000 hoặc 11434 đang được dùng
+**Cause**: Port 3000, 8000 or 11434 already in use
 
-**Giải pháp**:
+**Solution**:
 ```bash
 # Windows
 netstat -ano | findstr :3000
@@ -376,17 +376,17 @@ sudo lsof -t -i:3000 | xargs kill -9
 sudo lsof -t -i:8000 | xargs kill -9
 ```
 
-Hoặc đổi port trong `docker-compose.yml`:
+Or change port in `docker-compose.yml`:
 ```yaml
 ports:
-  - "3001:80"  # Đổi 3000 → 3001
+  - "3001:80"  # Change 3000 → 3001
 ```
 
-### ❌ Lỗi: "no space left on device"
+### ❌ Error: "no space left on device"
 
-**Nguyên nhân**: Docker hết disk space
+**Cause**: Docker out of disk space
 
-**Giải pháp**:
+**Solution**:
 ```bash
 # Clean up unused images/containers
 docker system prune -a
@@ -395,21 +395,21 @@ docker system prune -a
 docker volume prune
 ```
 
-### ❌ Backend không kết nối được Ollama
+### ❌ Backend cannot connect to Ollama
 
-**Kiểm tra Ollama**:
+**Check Ollama**:
 ```bash
 docker exec trollfb-ollama ollama list
 ```
 
-Nếu không thấy model, download lại:
+If model not visible, download again:
 ```bash
 docker exec trollfb-ollama ollama pull qwen2.5:7b-instruct-q4_K_M
 ```
 
-### ❌ Frontend không load được
+### ❌ Frontend not loading
 
-**Kiểm tra logs**:
+**Check logs**:
 ```bash
 docker-compose logs frontend
 ```
@@ -420,7 +420,7 @@ docker-compose build frontend
 docker-compose up -d frontend
 ```
 
-### ❌ Database bị lock
+### ❌ Database locked
 
 **Reset database**:
 ```bash
@@ -433,15 +433,15 @@ docker-compose up -d
 
 ## 🚀 Production Deployment
 
-### Tối Ưu Cho Production
+### Optimization for Production
 
-1. **Sử dụng PostgreSQL** thay vì SQLite:
-   - Thêm PostgreSQL service vào `docker-compose.yml`
+1. **Use PostgreSQL** instead of SQLite:
+   - Add PostgreSQL service to `docker-compose.yml`
    - Update `DATABASE_URL` environment variable
 
 2. **Enable HTTPS**:
-   - Sử dụng reverse proxy (Nginx/Traefik)
-   - Thêm SSL certificates
+   - Use reverse proxy (Nginx/Traefik)
+   - Add SSL certificates
 
 3. **Resource Limits**:
    ```yaml
@@ -454,7 +454,7 @@ docker-compose up -d
    ```
 
 4. **Logging**:
-   - Sử dụng centralized logging (ELK, Loki)
+   - Use centralized logging (ELK, Loki)
    - Configure log rotation
 
 5. **Monitoring**:
@@ -494,7 +494,7 @@ docker-compose up -d
 
 ---
 
-## 🎓 Học Thêm
+## 🎓 Learn More
 
 - [Docker Documentation](https://docs.docker.com/)
 - [Docker Compose Documentation](https://docs.docker.com/compose/)
@@ -502,4 +502,4 @@ docker-compose up -d
 
 ---
 
-**Chúc bạn deploy TrollFB thành công! 🎉⚽**
+**Successfully deploy TrollFB! 🎉⚽**

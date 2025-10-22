@@ -1,6 +1,6 @@
 # 🚀 TrollFB - Hướng Dẫn Cài Đặt Chi Tiết
 
-> 🌐 **Ngôn ngữ khác:** [English](INSTALLATION_GUIDE_EN.md)
+> 🌐 **Ngôn ngữ khác:** [English](INSTALLATION_GUIDE_EN.md) | **Tiếng Việt** (current)
 
 Hướng dẫn này giúp bạn cài đặt TrollFB từ đầu trên **Windows** hoặc **Ubuntu/Linux**, kể cả khi bạn chưa có kinh nghiệm lập trình.
 

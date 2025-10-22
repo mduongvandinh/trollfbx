@@ -1,6 +1,6 @@
 # ⚽ Football Meme Super App
 
-> 🌐 **Languages:** [English](README_EN.md) | **Tiếng Việt** (current)
+> 🌐 **Ngôn ngữ khác:** [English](README_EN.md) | **Tiếng Việt** (current)
 
 **Hệ thống tự động quản lý và vận hành fanpage bóng đá chuyên nghiệp**
 

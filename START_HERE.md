@@ -1,6 +1,6 @@
 # 🎯 BẮT ĐẦU TẠI ĐÂY - TrollFB Football Meme App
 
-> 🌐 **Ngôn ngữ khác:** [English](START_HERE_EN.md)
+> 🌐 **Ngôn ngữ khác:** [English](START_HERE_EN.md) | **Tiếng Việt** (current)
 
 ## 👋 Chào Mừng!
 

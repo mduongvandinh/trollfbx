@@ -1,14 +1,14 @@
-# ⚽ TrollFB - Tổng Hợp Tính Năng
+# ⚽ TrollFB - Feature Overview
 
-> 🌐 **Ngôn ngữ khác:** [English](FEATURES_EN.md) | **Tiếng Việt** (current)
+> 🌐 **Languages:** **English** (current) | [Tiếng Việt](FEATURES.md)
 
-**Football Meme Super App** - Hệ thống quản lý fanpage bóng đá tự động với AI
+**Football Meme Super App** - Automated football fanpage management system with AI
 
 ---
 
-## 📑 Mục Lục
+## 📑 Table of Contents
 
-- [Tổng Quan](#tổng-quan)
+- [Overview](#overview)
 - [1. AI Content Generation](#1-ai-content-generation)
 - [2. News Aggregation](#2-news-aggregation)
 - [3. Meme Library & AI Analysis](#3-meme-library--ai-analysis)
@@ -24,11 +24,11 @@
 
 ---
 
-## 🎯 Tổng Quan
+## 🎯 Overview
 
-TrollFB là một ứng dụng toàn diện giúp quản lý và tự động hóa việc tạo nội dung cho fanpage bóng đá, với các tính năng:
+TrollFB is a comprehensive application to manage and automate content creation for football fanpages, with features:
 
-✅ **11 Màn Hình Chính**
+✅ **11 Main Screens**
 ✅ **12 API Endpoints**
 ✅ **3 AI Models Integration** (Ollama, ComfyUI, Gemini)
 ✅ **2 Database Options** (SQLite + PostgreSQL/MySQL ready)
@@ -39,16 +39,16 @@ TrollFB là một ứng dụng toàn diện giúp quản lý và tự động h�
 
 ## 1. AI Content Generation
 
-### 1.1. Tạo Caption Tự Động
+### 1.1. Auto-Generate Captions
 
 **Location**: Dashboard, Content Creator
 
 **Features**:
-- ✅ Tạo caption bằng AI (Ollama local hoặc OpenAI)
-- ✅ Hỗ trợ tiếng Việt & tiếng Anh
-- ✅ Nhiều phong cách: Hài hước, châm biếm, cảm xúc, khích lệ
-- ✅ Custom prompt cho từng post
-- ✅ Tự động thêm hashtags phù hợp
+- ✅ Generate captions with AI (Ollama local or OpenAI)
+- ✅ Support Vietnamese & English
+- ✅ Multiple styles: Humorous, sarcastic, emotional, motivational
+- ✅ Custom prompt for each post
+- ✅ Auto-add relevant hashtags
 
 **Models**:
 - **Ollama**: `qwen2.5:7b-instruct-q4_K_M` (FREE, local)
@@ -56,74 +56,74 @@ TrollFB là một ứng dụng toàn diện giúp quản lý và tự động h�
 
 **Use Cases**:
 ```
-Input: "Ronaldo ghi bàn"
-Output: "🔥 SIUUUU! CR7 lại làm rung chuyển lưới!
-        Tuổi tác chỉ là con số với huyền thoại này! ⚽👑
+Input: "Ronaldo scores"
+Output: "🔥 SIUUUU! CR7 shakes the net again!
+        Age is just a number for this legend! ⚽👑
         #Ronaldo #CR7 #GOAT"
 ```
 
 ### 1.2. AI Content Suggestions
 
-**Location**: Trends Page → "Tạo Nội Dung" button
+**Location**: Trends Page → "Create Content" button
 
 **Features**:
-- ✅ Phân tích tin tức trending
-- ✅ Đề xuất ý tưởng content dựa trên tin
-- ✅ Tạo nhiều variations (5-10 suggestions)
-- ✅ Tự động generate caption cho mỗi suggestion
-- ✅ One-click copy sang Content Creator
+- ✅ Analyze trending news
+- ✅ Suggest content ideas based on news
+- ✅ Create multiple variations (5-10 suggestions)
+- ✅ Auto-generate caption for each suggestion
+- ✅ One-click copy to Content Creator
 
 **Workflow**:
 ```
-1. User click "Tạo Nội Dung" trên trending news
-2. AI phân tích context & góc nhìn
+1. User clicks "Create Content" on trending news
+2. AI analyzes context & angles
 3. Generate 5-10 content ideas
-4. Mỗi idea có sẵn caption + hashtags
-5. Click "Sử Dụng" → Auto-fill vào Content Creator
+4. Each idea has ready caption + hashtags
+5. Click "Use" → Auto-fill in Content Creator
 ```
 
 ### 1.3. Vietnamese Localization
 
 **Features**:
-- ✅ Tự động dịch tiêu đề tiếng Anh → tiếng Việt
-- ✅ Thêm góc nhìn Việt Nam vào tin quốc tế
-- ✅ Hashtags Việt hóa phù hợp
-- ✅ Phong cách viết gần gũi với fan Việt
+- ✅ Auto-translate English headlines → Vietnamese
+- ✅ Add Vietnamese perspective to international news
+- ✅ Vietnamized hashtags
+- ✅ Writing style friendly to Vietnamese fans
 
 ---
 
 ## 2. News Aggregation
 
-### 2.1. Tự Động Thu Thập Tin Tức
+### 2.1. Auto-Collect News
 
 **Location**: News Page
 
 **Sources**:
-- ✅ NewsAPI.org (đa nguồn)
+- ✅ NewsAPI.org (multi-source)
 - ✅ Football-specific APIs
-- ✅ RSS feeds (có thể mở rộng)
+- ✅ RSS feeds (expandable)
 
 **Categories**:
-- 🔄 Transfers (Chuyển nhượng)
-- ⚽ Match Results (Kết quả trận đấu)
-- 🎭 Drama (Scandal, thị phi)
-- 🤕 Injuries (Chấn thương)
-- 📰 General (Tin tổng hợp)
+- 🔄 Transfers
+- ⚽ Match Results
+- 🎭 Drama (Scandals, gossip)
+- 🤕 Injuries
+- 📰 General
 
 **Features**:
-- ✅ Auto-fetch mới nhất
-- ✅ Lọc theo category
-- ✅ Mark as used (theo dõi tin đã dùng)
+- ✅ Auto-fetch latest
+- ✅ Filter by category
+- ✅ Mark as used (track used news)
 - ✅ Search & filter
-- ✅ Refresh manual hoặc auto
+- ✅ Manual or auto refresh
 
 ### 2.2. Content Categorization
 
 **Smart categorization**:
-- ✅ Vietnamese content (tin liên quan Việt Nam)
-- ✅ International (tin quốc tế)
-- ✅ Mixed (có góc nhìn Việt)
-- ✅ General (tin thường)
+- ✅ Vietnamese content (Vietnam-related news)
+- ✅ International
+- ✅ Mixed (Vietnamese perspective)
+- ✅ General
 
 ---
 
@@ -134,19 +134,19 @@ Output: "🔥 SIUUUU! CR7 lại làm rung chuyển lưới!
 **Location**: Meme Library Page
 
 **Features**:
-- ✅ Upload ảnh meme + caption
-- ✅ AI phân tích pattern của meme:
+- ✅ Upload meme image + caption
+- ✅ AI analyzes meme pattern:
   - Template type (childhood_dream_irony, sponsor_troll, etc.)
   - Humor type (irony, sarcasm, comparison)
   - Key elements
   - Football context (player, team, situation)
   - Reusable format
-- ✅ Categorization tự động
-- ✅ Tagging tự động
+- ✅ Automatic categorization
+- ✅ Automatic tagging
 
 **AI Analysis Example**:
 ```
-Input Meme: Ảnh Elanga + "My childhood dream was to play for Adidas"
+Input Meme: Elanga image + "My childhood dream was to play for Adidas"
 
 AI Analysis:
 {
@@ -165,33 +165,33 @@ AI Analysis:
 ### 3.2. Generate Variations
 
 **Features**:
-- ✅ Chọn template đã analyze
-- ✅ Input tên cầu thủ mới
-- ✅ Input context/tình huống
-- ✅ AI generate 10-30 variations theo pattern
-- ✅ Copy variations để sử dụng
+- ✅ Select analyzed template
+- ✅ Input new player name
+- ✅ Input context/situation
+- ✅ AI generates 10-30 variations following pattern
+- ✅ Copy variations to use
 
 **Example Workflow**:
 ```
-1. Upload meme Elanga về Adidas
-2. AI phân tích pattern
-3. Generate variations cho Maguire:
+1. Upload Elanga meme about Adidas
+2. AI analyzes pattern
+3. Generate variations for Maguire:
    - "My dream was to win Champions League" (playing in Europa)
    - "My dream was to be the next Van Dijk" (making errors)
    - "My dream was to play for Barcelona" (playing for MU)
    ...10-30 more
-4. Copy caption hay nhất
-5. Tạo content mới
+4. Copy best caption
+5. Create new content
 ```
 
 ### 3.3. Meme Templates Library
 
 **Features**:
-- ✅ Lưu trữ tất cả memes đã analyze
-- ✅ Filter theo category
+- ✅ Store all analyzed memes
+- ✅ Filter by category
 - ✅ Sort by viral score
 - ✅ Track usage (times used, times generated)
-- ✅ Share templates giữa users (is_public flag)
+- ✅ Share templates between users (is_public flag)
 
 ---
 
@@ -201,13 +201,13 @@ AI Analysis:
 
 **Location**: Content Creator → Style Selection
 
-**⚠️ Yêu Cầu GPU**:
-- **Cần GPU NVIDIA** để generate ảnh nhanh (6GB+ VRAM khuyến nghị)
-- Có thể chạy CPU nhưng **rất chậm** (vài phút mỗi ảnh thay vì vài giây)
-- Nếu dùng Docker: Cần cài `nvidia-docker` để sử dụng GPU
+**⚠️ GPU Requirements**:
+- **Needs NVIDIA GPU** for fast image generation (6GB+ VRAM recommended)
+- Can run on CPU but **very slow** (minutes per image instead of seconds)
+- For Docker: Need to install `nvidia-docker` to use GPU
 
 **Features**:
-- ✅ 18+ LoRA Styles khả dụng:
+- ✅ 18+ LoRA Styles available:
   - Claymate (stop motion clay style)
   - Pixel Art
   - LEGO Minifig
@@ -215,29 +215,29 @@ AI Analysis:
   - Anime
   - Toy Face
   - Funko Pop
-  - ... và nhiều hơn
-- ✅ Preview thumbnails cho mỗi style
-- ✅ Auto-generate ảnh từ keyword
+  - ... and more
+- ✅ Preview thumbnails for each style
+- ✅ Auto-generate images from keywords
 - ✅ Custom prompts
-- ✅ Negative prompts để tránh style không mong muốn
+- ✅ Negative prompts to avoid unwanted styles
 
 **Workflow**:
 ```
-1. Nhập title/keyword (VD: "Ronaldo SIUUU")
-2. Chọn style (VD: 442oons)
-3. Click "Tạo Ảnh"
-4. ComfyUI generate ảnh theo style
-5. Ảnh được save và hiển thị
-6. Sử dụng cho post
+1. Enter title/keyword (e.g., "Ronaldo SIUUU")
+2. Select style (e.g., 442oons)
+3. Click "Generate Image"
+4. ComfyUI generates image in style
+5. Image is saved and displayed
+6. Use for post
 ```
 
 ### 4.2. Image Persistence
 
 **Features**:
-- ✅ Generated images được lưu vào `uploads/comfyui/`
-- ✅ Paths được track trong database
-- ✅ Reusable cho nhiều posts
-- ✅ Gallery view của tất cả images
+- ✅ Generated images saved to `uploads/comfyui/`
+- ✅ Paths tracked in database
+- ✅ Reusable for multiple posts
+- ✅ Gallery view of all images
 
 ---
 
@@ -252,11 +252,11 @@ AI Analysis:
 - ✅ Define text positions
 - ✅ Style configuration (font, color, size)
 - ✅ Preview before render
-- ✅ Generate video memes với text overlay
+- ✅ Generate video memes with text overlay
 
 **Video Formats**:
 - MP4, AVI, MOV supported
-- Text overlay với MoviePy
+- Text overlay with MoviePy
 - Export ready for social media
 
 ---
@@ -269,14 +269,14 @@ AI Analysis:
 
 **Features**:
 - ✅ Calendar view (daily/weekly/monthly)
-- ✅ Schedule posts cho tương lai
-- ✅ Drag & drop để reschedule
+- ✅ Schedule posts for future
+- ✅ Drag & drop to reschedule
 - ✅ Status tracking:
-  - Draft (nháp)
-  - Scheduled (đã lên lịch)
-  - Posted (đã đăng)
-  - Failed (thất bại)
-- ✅ Auto-post vào scheduled time
+  - Draft
+  - Scheduled
+  - Posted
+  - Failed
+- ✅ Auto-post at scheduled time
 - ✅ Multi-platform scheduling (FB, Twitter)
 
 ### 6.2. Content Organization
@@ -298,8 +298,8 @@ AI Analysis:
 
 **Features**:
 - ✅ Connect Facebook Page
-- ✅ Auto-post từ Content Calendar
-- ✅ Manual post với preview
+- ✅ Auto-post from Content Calendar
+- ✅ Manual post with preview
 - ✅ Platform-specific captions
 - ✅ Track post IDs
 - ✅ Fetch engagement metrics
@@ -315,7 +315,7 @@ AI Analysis:
 
 ### 7.2. Twitter Integration (Ready)
 
-**Structure sẵn sàng**:
+**Structure ready**:
 - Twitter post endpoints prepared
 - Tweet character limits handled
 - Media upload support
@@ -344,11 +344,11 @@ AI Analysis:
 **Per-Post Metrics**:
 
 **Facebook**:
-- Reach (tiếp cận)
-- Impressions (lượt hiển thị)
-- Likes (thích)
-- Comments (bình luận)
-- Shares (chia sẻ)
+- Reach
+- Impressions
+- Likes
+- Comments
+- Shares
 - Engagement rate
 
 **Twitter** (Ready):
@@ -407,7 +407,7 @@ AI Analysis:
 **Location**: AI Trends Page
 
 **Features**:
-- ✅ Auto-detect trending topics từ news
+- ✅ Auto-detect trending topics from news
 - ✅ Analyze trending keywords
 - ✅ Group related news
 - ✅ Calculate viral potential score
@@ -416,12 +416,12 @@ AI Analysis:
 
 **Workflow**:
 ```
-1. System analyze latest news
-2. Detect trending topics (VD: "Ronaldo transfer")
+1. System analyzes latest news
+2. Detect trending topics (e.g., "Ronaldo transfer")
 3. Group related articles
 4. Calculate trend score
 5. Show trending topics dashboard
-6. User click "Tạo Nội Dung"
+6. User clicks "Create Content"
 7. AI generates content suggestions
 8. One-click create post
 ```
@@ -436,7 +436,7 @@ AI Analysis:
   - Caption ready
   - Hashtags
   - Content angle
-- ✅ Click "Sử Dụng" → Auto-fill Content Creator
+- ✅ Click "Use" → Auto-fill Content Creator
 - ✅ Customize & post
 
 ---
@@ -484,15 +484,15 @@ AI Analysis:
 
 ### News Management
 ```
-GET  /api/news/latest          - Lấy tin mới nhất
-POST /api/news/refresh         - Làm mới tin tức
-GET  /api/news/categories      - Danh sách categories
+GET  /api/news/latest          - Get latest news
+POST /api/news/refresh         - Refresh news
+GET  /api/news/categories      - List categories
 ```
 
 ### Content Generation
 ```
-POST /api/content/generate-caption    - Tạo caption AI
-POST /api/content/save               - Lưu content
+POST /api/content/generate-caption    - Generate AI caption
+POST /api/content/save               - Save content
 GET  /api/content/list               - List contents
 ```
 
@@ -500,7 +500,7 @@ GET  /api/content/list               - List contents
 ```
 POST /api/meme/upload                - Upload meme + analyze
 POST /api/meme/generate-variations   - Generate caption variations
-GET  /api/meme/templates             - Danh sách templates
+GET  /api/meme/templates             - List templates
 GET  /api/meme/categories            - Meme categories
 ```
 
@@ -512,7 +512,7 @@ GET  /api/comfyui/styles             - List available styles
 
 ### Video Meme
 ```
-POST /api/video-meme/create          - Tạo video meme
+POST /api/video-meme/create          - Create video meme
 GET  /api/video-meme/templates       - Video templates
 ```
 
@@ -552,7 +552,7 @@ GET  /api/trends/analyze             - Analyze trend
 
 ### Content Suggestions
 ```
-POST /api/content-suggestions/generate   - Generate suggestions từ news
+POST /api/content-suggestions/generate   - Generate suggestions from news
 GET  /api/content-suggestions/history    - Suggestion history
 ```
 
@@ -566,36 +566,36 @@ PUT  /api/settings                   - Update settings
 
 ## 🎯 Use Case Examples
 
-### Use Case 1: Tạo Post Từ Tin Tức Trending
+### Use Case 1: Create Post from Trending News
 
 ```
-1. Vào Trends Page
-2. Thấy tin "Ronaldo ghi hat-trick" đang trending
-3. Click "Tạo Nội Dung"
-4. AI suggest 10 ý tưởng:
-   - "Tuổi già nhưng vẫn siêu phàm! CR7 lại chứng tỏ đẳng cấp"
-   - "Hat-trick ở tuổi 38! Ronaldo viết tiếp câu chuyện cổ tích"
+1. Go to Trends Page
+2. See "Ronaldo hat-trick" trending
+3. Click "Create Content"
+4. AI suggests 10 ideas:
+   - "Old but gold! CR7 proves his class again"
+   - "Hat-trick at 38! Ronaldo continues fairy tale"
    - ... 8 more ideas
-5. Chọn idea hay nhất, click "Sử Dụng"
-6. Auto-fill vào Content Creator
-7. Chọn style 442oons
-8. Generate ảnh Ronaldo
-9. Schedule post cho 7PM
+5. Select best idea, click "Use"
+6. Auto-fill to Content Creator
+7. Select 442oons style
+8. Generate Ronaldo image
+9. Schedule post for 7PM
 10. DONE! ✅
 ```
 
-### Use Case 2: Tạo Meme Variations
+### Use Case 2: Create Meme Variations
 
 ```
-1. Upload ảnh meme về Maguire errors
+1. Upload Maguire error meme
 2. Caption: "Maguire defending be like..."
-3. AI analyze pattern
-4. Generate 20 variations cho các cầu thủ khác:
+3. AI analyzes pattern
+4. Generate 20 variations for other players:
    - "Nunez finishing be like..." (miss sitter)
    - "Sterling decision making be like..." (wrong choice)
    - "Fred passing be like..." (random direction)
    ... 17 more
-5. Copy variations vào Content Creator
+5. Copy variations to Content Creator
 6. Create series posts
 7. Schedule throughout the week
 8. Track engagement
@@ -604,11 +604,11 @@ PUT  /api/settings                   - Update settings
 ### Use Case 3: Monetization Campaign
 
 ```
-1. Vào Monetization Page
-2. Create campaign: "Áo đấu MU 2024"
+1. Go to Monetization Page
+2. Create campaign: "MU Jersey 2024"
 3. Add affiliate link
 4. Set commission: 10%
-5. Create post về áo đấu
+5. Create post about jersey
 6. Include affiliate link
 7. Post to Facebook
 8. Track clicks: 150
@@ -621,11 +621,11 @@ PUT  /api/settings                   - Update settings
 ## 🎓 Training & Support
 
 ### Documentation
-- ✅ README.md - Overview
-- ✅ START_HERE.md - Quick start
-- ✅ INSTALLATION_GUIDE.md - Detailed setup
-- ✅ DOCKER_GUIDE.md - Docker deployment
-- ✅ FEATURES.md - This file
+- ✅ README_EN.md - Overview
+- ✅ START_HERE_EN.md - Quick start
+- ✅ INSTALLATION_GUIDE_EN.md - Detailed setup
+- ✅ DOCKER_GUIDE_EN.md - Docker deployment
+- ✅ FEATURES_EN.md - This file
 
 ### Quick Start Scripts (Windows)
 - `setup-all.bat` - One-click setup

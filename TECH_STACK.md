@@ -1,10 +1,12 @@
 # 🛠️ TrollFB - Tech Stack Documentation
 
-Chi tiết đầy đủ về công nghệ, thư viện và tools được sử dụng trong TrollFB.
+> 🌐 **Languages:** **English** (current) | [Tiếng Việt](TECH_STACK_VI.md)
+
+Complete details about technologies, libraries and tools used in TrollFB.
 
 ---
 
-## 📑 Mục Lục
+## 📑 Table of Contents
 
 - [Architecture Overview](#architecture-overview)
 - [Backend Stack](#backend-stack)
